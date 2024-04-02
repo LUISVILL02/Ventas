@@ -43,7 +43,7 @@ public class Order {
     private Customer customer;
 
     @OneToMany(mappedBy = "order")
-    List<OrderItem> orderItems;
+    private List<OrderItem> orderItems;
 
     @OneToOne
     @JoinColumn(name = "idPayment")
