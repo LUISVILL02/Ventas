@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ventas.tienda.model.entities.Product;
 
+import java.util.Optional;
+
 public interface ProductRepository extends Repository<Product>{
     Page<Product> findByName(Pageable pageable, String name);
     Page<Product> findByStockGreaterThan(Pageable pageable, Integer stock);
