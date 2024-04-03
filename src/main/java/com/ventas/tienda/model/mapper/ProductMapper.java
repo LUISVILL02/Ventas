@@ -9,4 +9,5 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper extends MapperGen<ProductDtoSave, ProductDtoSend, Product>{
+
 }
