@@ -1,5 +1,6 @@
 package com.ventas.tienda.model.Dtos.send;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ventas.tienda.model.entities.Order;
 import lombok.AllArgsConstructor;
 import lombok.Data;

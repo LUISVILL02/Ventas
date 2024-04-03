@@ -13,5 +13,5 @@ public class ShippingDetailsDtoSend {
     private String address;
     private String carrier;
     private Long guideNumber;
-    private OrderDtoSend order;
+    private Long idOrder;
 }

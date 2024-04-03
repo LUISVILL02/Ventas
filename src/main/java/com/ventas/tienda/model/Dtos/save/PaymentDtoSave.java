@@ -5,14 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaymentDtoSave {
-    private Double paymentAmount;
+    private Double paymentTotal;
     @JsonFormat(pattern = "dd/MM/yyyy",timezone = "GMT-5")
-    private LocalDateTime paymentDate;
+    private LocalDate paymentDate;
     private String paymentMethod;
 }

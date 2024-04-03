@@ -13,6 +13,6 @@ public class OrderItemDtoSend {
     private Integer quantity;
 
     private Double unitPrice;
-    private OrderDtoSend order;
-    private ProductDtoSend product;
+    private Long idOrder;
+    private Long idProduct;
 }
