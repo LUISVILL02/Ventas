@@ -38,11 +38,4 @@ public abstract class ServiceImp<S, M, E> implements Service<S, M, E> {
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
-
-    public M update(S s, Long id) {
-        repository.findById(id)
-                .orElseThrow(()-> new RuntimeException("User not found"));
-        E eUpdate = mapper.dtoSaveToEntity(s);
-        return mapper.EntityToDtoSend(repository.save(eUpdate));
-    }
 }

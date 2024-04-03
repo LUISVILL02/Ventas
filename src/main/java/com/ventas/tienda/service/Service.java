@@ -9,5 +9,4 @@ public interface Service<S, M, E>{
     Optional<M> findById(Long id);
     M save(S s);
     void deleteById(Long id);
-    M update(S s, Long id);
 }
