@@ -3,6 +3,7 @@ package com.ventas.tienda.model.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import lombok.*;
 import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.Column;
@@ -15,10 +16,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 @Entity
@@ -27,6 +24,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
