@@ -26,7 +26,7 @@ public abstract class ServiceImp<S, M, E> implements Service<S, M, E> {
 
     public Optional<M> findById(Long id) {
         Optional<E> user = Optional.ofNullable(repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found")));
+                .orElseThrow(() -> new RuntimeException("Entity not found")));
         return user.map(mapper::EntityToDtoSend);
     }
 
