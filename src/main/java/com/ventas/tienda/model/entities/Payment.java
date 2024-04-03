@@ -1,15 +1,9 @@
 package com.ventas.tienda.model.entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,14 +22,20 @@ public class Payment {
     @Column(name = "payment_total")
     private Double paymentTotal;
     @Column(name = "payment_date")
-    private LocalDateTime paymentDate;
+    private LocalDate paymentDate;
     @Column(name = "payment_method")
     private MethodPay paymentMethod;
 
-    @OneToOne(mappedBy = "payment")
+    @OneToOne
+    @JoinColumn(name = "idOrder")
     private Order order;
 
     public enum MethodPay {
         CASH, CREDIT_CARD, PAYPAL, NEQUI, DAVIPLATA, PSE
+    }
+
+    public Payment paymentUpdate(Payment payment){
+        Order updatedOrder = payment.getOrder() != null ? payment.getOrder() : this.order;
+        return new Payment(this.idPayment, payment.paymentTotal, payment.paymentDate, payment.paymentMethod, updatedOrder);
     }
 }

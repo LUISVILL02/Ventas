@@ -9,4 +9,5 @@ public interface MapperGen<S, M, E> {
     E dtoSendToEntity(M m);
     List<M> ListEntityToDtoSend(List<E> e);
     List<E> ListDtoSendToEntity(List<M> m);
+
 }

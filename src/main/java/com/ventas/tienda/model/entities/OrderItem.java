@@ -36,5 +36,11 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(name = "idProduct")
     private Product product;
+
+    public OrderItem orderItemUpdate(OrderItem orderItem){
+        Product product = orderItem.getProduct() != null ? orderItem.getProduct() : this.product;
+        Order updatedOrder = orderItem.getOrder() != null ? orderItem.getOrder() : this.order;
+        return new OrderItem(this.idOrderItem, orderItem.quantity, orderItem.unitPrice, updatedOrder, product);
+    }
     
 }

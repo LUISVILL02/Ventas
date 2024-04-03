@@ -31,4 +31,8 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     List<OrderItem> orderItems;
+
+    public Product updateProduct(Product product){
+        return new Product(this.idProduct, product.name, product.price, product.stock, product.orderItems);
+    }
 }

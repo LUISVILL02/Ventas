@@ -37,4 +37,8 @@ public class Customer {
     
     @OneToMany(mappedBy = "customer")
     List<Order> orders;
+
+    public Customer updateCustomer(Customer customer){
+        return new Customer(this.idCustomer, customer.name, customer.email, customer.address, customer.orders);
+    }
 }

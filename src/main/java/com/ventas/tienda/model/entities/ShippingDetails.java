@@ -1,13 +1,7 @@
 package com.ventas.tienda.model.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +24,12 @@ public class ShippingDetails {
     @Column(nullable = false)
     private Long guideNumber;
 
-    @OneToOne(mappedBy = "details")
+    @OneToOne
+    @JoinColumn(name = "idOrder")
     private Order order;
+
+    public ShippingDetails shippingDetailsUpdate(ShippingDetails shippingDetails) {
+        Order orderUpdate = getOrder() != null ? getOrder() : shippingDetails.getOrder();
+        return new ShippingDetails(this.idDetail, shippingDetails.address, shippingDetails.carrier, shippingDetails.guideNumber, orderUpdate);
+    }
 }

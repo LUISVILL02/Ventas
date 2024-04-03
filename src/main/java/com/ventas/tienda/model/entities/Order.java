@@ -33,7 +33,7 @@ public class Order {
     private Long idOrder;
 
     @Column(nullable = false)
-    private LocalDateTime oderDate;
+    private LocalDateTime orderDate;
 
     @Column(nullable = false)
     private Status status;
@@ -45,16 +45,19 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems;
 
-    @OneToOne
-    @JoinColumn(name = "idPayment")
+    @OneToOne(mappedBy = "order")
     private Payment payment;
 
-    @OneToOne
-    @JoinColumn(name = "idDetail")
+    @OneToOne(mappedBy = "order")
     private ShippingDetails details;
 
     public enum Status {
         PENDING, SENT, DELIVERED
+    }
+
+    public Order updateOrder(Order order){
+        Customer updatedCustomer = order.getCustomer() != null ? order.getCustomer() : this.customer;
+        return new Order(this.idOrder, LocalDateTime.now(), order.status, updatedCustomer, order.orderItems, order.payment, order.details);
     }
     
 }
