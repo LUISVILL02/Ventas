@@ -39,7 +39,7 @@ public class OrderServiceImpl extends ServiceImp<OrderDtoSave, OrderDtoSend, Ord
     @Override
     public Page<OrderDtoSend> findByStatusAndCustomer(Order.Status status, Long idCustomer) {
         Pageable pageable = PageRequest.of(0, 10);
-        Page<Order> listOrder = orderRepository.findByStatusAndCustomer(pageable, status, idCustomer);
+        Page<Order> listOrder = orderRepository.findByStatusAndCustomer_IdCustomer(pageable, status, idCustomer);
         return listOrder.map(orderMapper::EntityToDtoSend);
     }
 
