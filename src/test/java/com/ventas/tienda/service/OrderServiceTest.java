@@ -89,7 +89,7 @@ class OrderServiceTest {
         Long idCustomer = 1L;
 
         Page<Order> pageOrder = createPageWithSingleProduct(order);
-        when(orderRepository.findByStatusAndCustomer(PageRequest.of(0,10), status, idCustomer)).thenReturn(pageOrder);
+        when(orderRepository.findByStatusAndCustomer_IdCustomer(PageRequest.of(0,10), status, idCustomer)).thenReturn(pageOrder);
         when(orderMapper.EntityToDtoSend(order)).thenReturn(orderDtoSend);
 
         Page<OrderDtoSend> result = orderService.findByStatusAndCustomer(status, idCustomer);
