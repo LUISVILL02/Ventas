@@ -2,10 +2,7 @@ package com.ventas.tienda.model.entities;
 
 import jakarta.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "detalles-envios")
@@ -13,6 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ShippingDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
