@@ -6,6 +6,7 @@ import com.ventas.tienda.service.CustomerService;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,13 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping("{id}")
-    public ResponseEntity<CustomerDtoSend> getById(@PathVariable Long id){
-        return ResponseEntity.ok(customerService.findById(id).get());
+    public ResponseEntity<?> getById(@PathVariable Long id){
+        try {
+            return ResponseEntity.ok(customerService.findById(id).get());
+        } catch (RuntimeException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @GetMapping
@@ -49,7 +55,7 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<CustomerDtoSend> save(@RequestBody CustomerDtoSave customerDtoSave){
-        return ResponseEntity.ok(customerService.save(customerDtoSave));
+        return new ResponseEntity<>(customerService.save(customerDtoSave),HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

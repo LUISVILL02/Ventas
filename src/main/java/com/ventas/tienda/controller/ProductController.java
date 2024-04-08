@@ -6,6 +6,7 @@ import com.ventas.tienda.service.ProductService;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +19,12 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/{idProduct}")
-    public ResponseEntity<ProductDtoSend> getById(@PathVariable Long idProduct){
-        return ResponseEntity.ok(productService.findById(idProduct).get());
+    public ResponseEntity<?> getById(@PathVariable Long idProduct){
+        try {
+            return ResponseEntity.ok(productService.findById(idProduct).get());
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/name")
@@ -35,7 +40,7 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductDtoSend> save(@RequestBody ProductDtoSave productDtoSave){
-        return ResponseEntity.ok(productService.save(productDtoSave));
+        return new ResponseEntity<>(productService.save(productDtoSave), HttpStatus.CREATED);
     }
 
     @PutMapping("/{idProduct}")

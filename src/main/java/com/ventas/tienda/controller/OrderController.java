@@ -22,11 +22,11 @@ import java.util.Optional;
 public class OrderController {
     private final OrderService orderService;
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Optional<OrderDtoSend> orderDtoSend = orderService.findById(id);
         if (orderDtoSend.isEmpty()){
-            return ResponseEntity.badRequest().body("pedido no encontrado");
+            return ResponseEntity.badRequest().body("Order not found");
         }
         return ResponseEntity.ok(orderDtoSend.get());
     }
@@ -65,6 +65,6 @@ public class OrderController {
     @DeleteMapping("{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
         orderService.deleteById(id);
-        return ResponseEntity.ok("Pedido eliminado");
+        return ResponseEntity.ok("Order delete");
     }
 }
